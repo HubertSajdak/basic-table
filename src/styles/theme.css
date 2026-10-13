@@ -1,0 +1,264 @@
+/**
+ * ============================================================
+ * DESIGN SYSTEM – THEME TOKENS
+ * ============================================================
+ *
+ * Philosophy:
+ * - No pure black, no pure white
+ * - Warm, calm neutrals; color is reserved for actions, data and status
+ * - Depth is expressed via elevation and hairline borders, not heavy contrast
+ *
+ * Architecture (The 2-Layer Model):
+ * 1. :root -> Primitives. The absolute source of truth. No logic.
+ * 2. @theme -> Semantics. Tailwind API. Defines HOW and WHERE primitives are used.
+ *
+ * Mental Model: Spatial UI (Z-axis)
+ * - 'surface': Physical layers (canvas, platforms, inset wells)
+ * - 'content': Information placed ON those surfaces (text, icons)
+ * ============================================================
+ */
+
+/* ============================================================
+ * 1. ROOT TOKENS (Primitives / The Raw Values)
+ * ============================================================ */
+:root {
+  /* --- Color Palette (HEX only, no alpha channels) --- */
+
+  /* Neutral Scale (warm stone grays) */
+  --palette-neutral-0: #fdfdfc;
+  --palette-neutral-25: #f9f9f8;
+  --palette-neutral-50: #f5f5f4;
+  --palette-neutral-100: #efefed;
+  --palette-neutral-150: #e7e7e5;
+  --palette-neutral-200: #dadad7;
+  --palette-neutral-300: #c2c2be;
+  --palette-neutral-400: #9a9a96;
+  --palette-neutral-500: #73736f;
+  --palette-neutral-600: #5a5a57;
+  --palette-neutral-700: #3f3f3d;
+  --palette-neutral-800: #282827;
+  --palette-neutral-900: #1a1a19;
+
+  /* Blue Scale (muted steel blue) */
+  --palette-blue-50: #edf5f9;
+  --palette-blue-100: #d4e7f0;
+  --palette-blue-200: #a9cfe1;
+  --palette-blue-300: #5f9fbf;
+  --palette-blue-400: #2f7396;
+  --palette-blue-500: #1f5470;
+
+  /* Red Scale */
+  --palette-red-50: #fdf0f0;
+  --palette-red-100: #fbd9d8;
+  --palette-red-200: #f4a6a3;
+  --palette-red-300: #ea6a65;
+  --palette-red-400: #dc4a46;
+  --palette-red-500: #b53632;
+
+  /* Green Scale */
+  --palette-green-50: #edf8f1;
+  --palette-green-100: #d3eedd;
+  --palette-green-200: #a3dbb8;
+  --palette-green-300: #5bb683;
+  --palette-green-400: #2f8a57;
+  --palette-green-500: #1f6640;
+
+  /* Orange Scale (warm peach) */
+  --palette-orange-50: #fdf3ec;
+  --palette-orange-100: #f9e0cf;
+  --palette-orange-200: #f0bd9b;
+  --palette-orange-300: #e08d5c;
+  --palette-orange-400: #b8612f;
+  --palette-orange-500: #8a4422;
+
+  /* --- Scales (Math & Geometry) --- */
+
+  /* Spacing Scale (4px baseline) */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+
+  /* Radius Scale */
+  --shape-radius-xs: 0.125rem; /* 2px */
+  --shape-radius-sm: 0.25rem; /* 4px */
+  --shape-radius-md: 0.5rem; /* 8px */
+  --shape-radius-lg: 0.75rem; /* 12px */
+  --shape-radius-xl: 1rem; /* 16px */
+  --shape-radius-pill: 999rem; /* Fully rounded for pills and circles */
+
+  /* Icon Scale */
+  --icon-size: 1.5rem; /* 24px */
+  --icon-stroke-width: 1.5;
+
+  /* --- Typography --- */
+  --font-family-base: 'Inter', sans-serif;
+}
+
+/* ============================================================
+ * 2. THEME MAPPING (Semantic Layer for Tailwind v4)
+ * ============================================================ */
+@theme {
+  /* ----------------------------------------------------------
+   * SURFACES (The Physical Layers / Z-axis)
+   * Back -> Front layering:
+   * L0  : surface-page (app canvas: body, sidebar)
+   * L0.5: surface-sunken (inset wells: inputs, skeletons, chips)
+   * L1  : surface-subtle (quiet bars: table header, hover rows)
+   * L2  : surface-raised (cards, main content panel, active nav item)
+   * ---------------------------------------------------------- */
+  --color-surface-page: var(--palette-neutral-50);
+  --color-surface-sunken: var(--palette-neutral-100);
+  --color-surface-subtle: var(--palette-neutral-25);
+  --color-surface-raised: var(--palette-neutral-0);
+  --color-surface-base: var(--palette-neutral-0);
+  --color-surface-box: var(--palette-blue-50);
+
+  /* ----------------------------------------------------------
+   * CONTENT (The Ink / What sits on the surfaces)
+   * ---------------------------------------------------------- */
+  --color-content-primary: var(--palette-neutral-900);
+  --color-content-secondary: var(--palette-neutral-500);
+  --color-content-muted: var(--palette-neutral-400);
+  --color-content-inverse: var(--palette-neutral-0);
+  --color-content-white: var(--palette-neutral-0); /* near-white, not #fff */
+  --color-content-black: var(--palette-neutral-900); /* near-black, not #000 */
+
+  /* Aliases kept for existing usages (body, page text) */
+  --color-content-page-primary: var(--color-content-primary);
+  --color-content-page-secondary: var(--color-content-secondary);
+  --color-content-page-muted: var(--color-content-muted);
+
+  /* shadcn/ui aliases (used inside shadcn components, e.g. tooltip, pinned table cells) */
+  --color-foreground: var(--color-content-primary);
+  --color-background: var(--color-surface-raised);
+
+  /* Sidebar navigation */
+  --color-sidebar-content: var(--palette-neutral-800);
+  --color-sidebar-icon: var(--palette-neutral-500);
+  --color-sidebar-content-active: var(--palette-neutral-900);
+
+  /* ----------------------------------------------------------
+   * INTERACTIVE (Brand & Actions)
+   * ---------------------------------------------------------- */
+  --color-primary: var(--palette-red-400);
+  --color-primary-hover: var(--palette-red-500);
+  --color-primary-active: var(--palette-red-500);
+  --color-primary-foreground: var(--palette-neutral-0);
+
+  /* Focus ring */
+  --color-focus-ring: color-mix(in srgb, var(--palette-blue-300) 45%, transparent);
+
+  /* ----------------------------------------------------------
+   * FEEDBACK & TAGS (content on top of a tinted surface)
+   * ---------------------------------------------------------- */
+  --color-feedback-error: var(--palette-red-400);
+  --color-feedback-error-surface: var(--palette-red-50);
+  --color-feedback-success: var(--palette-green-400);
+  --color-feedback-success-surface: var(--palette-green-50);
+  --color-feedback-warning: var(--palette-orange-400);
+  --color-feedback-warning-surface: var(--palette-orange-50);
+  --color-feedback-info: var(--palette-blue-400);
+  --color-feedback-info-surface: var(--palette-blue-50);
+
+  /* ----------------------------------------------------------
+   * DIVIDERS & OUTLINES
+   * ---------------------------------------------------------- */
+  --color-border: var(--palette-neutral-150);
+  --color-divider: var(--palette-neutral-150);
+  --color-divider-subtle: var(--palette-neutral-100);
+
+  /* ----------------------------------------------------------
+   * ELEVATION (Shadows)
+   * Hairline ring + soft drop, tinted with warm ink
+   * ---------------------------------------------------------- */
+  --shadow-sm:
+    0 0 0 1px color-mix(in srgb, var(--palette-neutral-900) 12%, transparent),
+    0 1px 2px color-mix(in srgb, var(--palette-neutral-900) 16%, transparent),
+    0 2px 4px color-mix(in srgb, var(--palette-neutral-900) 4%, transparent);
+
+  --shadow-md:
+    0 0 0 1px var(--palette-neutral-150), 0 4px 12px color-mix(in srgb, var(--palette-neutral-900) 8%, transparent);
+
+  /* ----------------------------------------------------------
+   * TABLE
+   * ---------------------------------------------------------- */
+  --color-table-header: var(--color-surface-subtle);
+  --color-table-header-border: var(--color-border);
+  --color-table-header-border-top: var(--palette-neutral-200); /* slightly stronger top edge */
+  --color-table-header-content: var(--color-content-secondary);
+  --color-table-row-border: var(--color-divider); /* lighter than header border */
+  --color-table-row-hover: var(--palette-neutral-50); /* opaque: pinned cells must hide what scrolls under them */
+  --color-table-row-selected: var(--palette-neutral-100); /* clicked row; one step darker than hover */
+
+  /* ----------------------------------------------------------
+   * SCALES (Mapping to Tailwind utilities: p-*, m-*, rounded-*)
+   * ---------------------------------------------------------- */
+  /* Prefixed with "space-": plain xs..xl would collide with --container-* in
+   * Tailwind lookups (max-w-xs resolves --spacing-xs before --container-xs) */
+  --spacing-space-xs: var(--space-xs);
+  --spacing-space-sm: var(--space-sm);
+  --spacing-space-md: var(--space-md);
+  --spacing-space-lg: var(--space-lg);
+  --spacing-space-xl: var(--space-xl);
+
+  --radius-xs: var(--shape-radius-xs);
+  --radius-sm: var(--shape-radius-sm);
+  --radius-md: var(--shape-radius-md);
+  --radius-lg: var(--shape-radius-lg);
+  --radius-xl: var(--shape-radius-xl);
+  --radius-pill: var(--shape-radius-pill);
+
+  /* ----------------------------------------------------------
+   * TYPOGRAPHY (Mapping to Tailwind utilities: font-*, text-*)
+   * Composite variants (typography-*) live in typography.css
+   * ---------------------------------------------------------- */
+  --font-sans: var(--font-family-base);
+
+  --text-h1: 6rem; /* 96px */
+  --text-h1--line-height: 1.167;
+  --text-h1--font-weight: 300;
+
+  --text-h2: 3.75rem; /* 60px */
+  --text-h2--line-height: 1.2;
+  --text-h2--font-weight: 300;
+
+  --text-h3: 3rem; /* 48px */
+  --text-h3--line-height: 1.167;
+  --text-h3--font-weight: 400;
+
+  --text-h4: 2.125rem; /* 34px */
+  --text-h4--line-height: 1.235;
+  --text-h4--font-weight: 400;
+
+  /* Title */
+  --text-h5: 1.5rem; /* 24px */
+  --text-h5--line-height: 2.25rem; /* 36px */
+  --text-h5--font-weight: 600;
+
+  --text-h6: 1.25rem; /* 20px */
+  --text-h6--line-height: 1.6;
+  --text-h6--font-weight: 500;
+
+  /* Item title */
+  --text-subtitle1: 0.75rem; /* 12px */
+  --text-subtitle1--line-height: normal;
+  --text-subtitle1--font-weight: 600;
+
+  --text-subtitle2: 0.875rem; /* 14px */
+  --text-subtitle2--line-height: 1.57;
+  --text-subtitle2--font-weight: 500;
+
+  --text-body1: 0.875rem; /* 14px */
+  --text-body1--line-height: 1.5;
+  --text-body1--font-weight: 400;
+
+  --text-caption: 0.75rem; /* 12px */
+  --text-caption--line-height: 1.66;
+  --text-caption--font-weight: 400;
+
+  --text-button: 0.875rem; /* 14px */
+  --text-button--line-height: 1.75;
+  --text-button--font-weight: 500;
+}

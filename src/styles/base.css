@@ -1,0 +1,55 @@
+@layer base {
+  :root {
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: color-mix(in srgb, var(--color-divider-subtle) 55%, transparent);
+    --scrollbar-thumb-hover: color-mix(in srgb, var(--color-divider-subtle) 75%, transparent);
+    --scrollbar-size: var(--space-sm);
+    --scrollbar-radius: var(--radius-pill);
+  }
+
+  body {
+    @apply bg-surface-page text-content-page-primary;
+  }
+
+  /* ------------------------------------------------------------
+   * Firefox
+   * ------------------------------------------------------------ */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  /* ------------------------------------------------------------
+   * WebKit
+   * ------------------------------------------------------------ */
+  *::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: var(--scrollbar-radius);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+}
+
+/* ------------------------------------------------------------
+ * Icons (Tabler)
+ * Unlayered on purpose: must win over shadcn's [&_svg]:size-4 utilities.
+ * Per-icon override: className="[--icon-size:1rem]"
+ * ------------------------------------------------------------ */
+.tabler-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  stroke-width: var(--icon-stroke-width);
+}

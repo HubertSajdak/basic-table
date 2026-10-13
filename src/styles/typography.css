@@ -1,0 +1,51 @@
+/* ============================================================
+ * TYPOGRAPHY VARIANTS
+ * Composite utilities: size, weight and line-height come from
+ * the --text-* tokens in theme.css; extras (case, color) are added here.
+ * ============================================================ */
+
+@utility typography-h1 {
+  @apply text-h1;
+}
+
+@utility typography-h2 {
+  @apply text-h2;
+}
+
+@utility typography-h3 {
+  @apply text-h3;
+}
+
+@utility typography-h4 {
+  @apply text-h4;
+}
+
+/* Title */
+@utility typography-h5 {
+  @apply text-h5;
+}
+
+@utility typography-h6 {
+  @apply text-h6;
+}
+
+/* Item title */
+@utility typography-subtitle1 {
+  @apply text-subtitle1 uppercase;
+}
+
+@utility typography-subtitle2 {
+  @apply text-subtitle2 text-content-secondary;
+}
+
+@utility typography-body1 {
+  @apply text-body1;
+}
+
+@utility typography-caption {
+  @apply text-caption;
+}
+
+@utility typography-button {
+  @apply text-button normal-case text-primary-active;
+}
